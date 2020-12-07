@@ -1,29 +1,28 @@
 import unittest 
+import numpy as np
 from solution import *
 
 class MyTests(unittest.TestCase):
 
-    def test_get_case(self):
-        line = '..##.......'
-        self.assertEqual(get_case(line, 3),'#')
-        self.assertEqual(get_case(line, 14),'#')
-        self.assertEqual(get_case(line, 16),'.')
-        line = '.#...##..#.'
-        self.assertEqual(get_case(line, 12),'#')
+    def test_decode_row_number(self):
+        self.assertEqual(decode_row_number('BFFFBBF'), 70)
+        self.assertEqual(decode_row_number('FFFBBBF'), 14)
+        self.assertEqual(decode_row_number('BBFFBBF'), 102)
 
-    def test_get_nb_tree(self):
-        file1 = open('test_input.txt', 'r')
-        myList = file1.readlines()
-        self.assertEqual(get_nb_tree(myList, 1, 1),2)
-        self.assertEqual(get_nb_tree(myList, 3, 1),7)
-        self.assertEqual(get_nb_tree(myList, 5, 1),3)
-        self.assertEqual(get_nb_tree(myList, 7, 1),4)
-        self.assertEqual(get_nb_tree(myList, 1, 2),2)
-        file1.close()
-        
+    def test_decode_column_number(self):
+        self.assertEqual(decode_column_number('RRR'), 7)
+        self.assertEqual(decode_column_number('RLL'), 4)
 
-    def test_main(self):
-        self.assertEqual(main('test_input.txt'),336)
+    def test_decode_seat_id(self):
+        self.assertEqual(decode_seat_id('BFFFBBFRRR'), 567)
+        self.assertEqual(decode_seat_id('FFFBBBFRRR'), 119)
+        self.assertEqual(decode_seat_id('BBFFBBFRLL'), 820)
+
+    def test_find_max_seat_id(self):
+        self.assertEqual(find_max_seat_id('test_input.txt'),820)
+
+    def test_find_empty_seats(self):
+        self.assertEqual(find_empty_seats('test_input.txt'),820)
 
 if __name__ == '__main__':
     unittest.main()
